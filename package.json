@@ -33,7 +33,8 @@
   "devDependencies": {
     "mocha": "^12.0.3",
     "node-red": "^5.0.7",
-    "node-red-node-test-helper": "^0.3.6"
+    "node-red-node-test-helper": "^0.3.6",
+    "undici": "7.30.0"
   },
   "repository": {
     "type": "git",
