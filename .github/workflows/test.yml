@@ -1,0 +1,28 @@
+name: Validate
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        node-red: ['4.1.8', '5.0.7']
+    env:
+      NODE_RED_TEST_VERSION: ${{ matrix.node-red }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install locked development dependencies
+        run: docker run --rm --user "$(id -u):$(id -g)" -e npm_config_cache=/tmp/npm -v "$PWD:/app" -w /app node:22-bookworm npm ci
+      - name: Select compatibility runtime
+        if: matrix.node-red == '4.1.8'
+        run: docker run --rm --user "$(id -u):$(id -g)" -e npm_config_cache=/tmp/npm -v "$PWD:/app" -w /app node:22-bookworm npm install --no-save --package-lock=false node-red@4.1.8
+      - name: Verify runtime and run offline tests
+        run: |
+          docker run --rm --network none --user "$(id -u):$(id -g)" -e NODE_RED_TEST_VERSION -e npm_config_cache=/tmp/npm -v "$PWD:/app" -w /app node:22-bookworm sh -c 'node -e "require(\"node:assert/strict\").equal(require(\"node-red/package.json\").version, process.env.NODE_RED_TEST_VERSION)" && npm test && npm pack --dry-run'
+      - name: Audit shipped dependencies
+        run: docker run --rm --user "$(id -u):$(id -g)" -e npm_config_cache=/tmp/npm -v "$PWD:/app" -w /app node:22-bookworm npm audit --omit=dev --audit-level=low

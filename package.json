@@ -1,0 +1,46 @@
+{
+  "name": "@mailchannels/node-red-mailchannels",
+  "version": "0.1.0",
+  "description": "Send transactional email with the MailChannels Email API from Node-RED.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "node-red",
+    "mailchannels",
+    "email",
+    "transactional-email"
+  ],
+  "node-red": {
+    "version": ">=4.0.0",
+    "nodes": {
+      "mailchannels": "nodes/mailchannels.js"
+    }
+  },
+  "files": [
+    "nodes/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "mocha --timeout 5000 test/**/*.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "mocha": "^12.0.3",
+    "node-red": "^5.0.7",
+    "node-red-node-test-helper": "^0.3.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mailchannels/node-red-mailchannels.git"
+  },
+  "homepage": "https://github.com/mailchannels/node-red-mailchannels#readme",
+  "bugs": {
+    "url": "https://github.com/mailchannels/node-red-mailchannels/issues"
+  }
+}

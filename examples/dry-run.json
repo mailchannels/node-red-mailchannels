@@ -1,0 +1,69 @@
+[
+  {
+    "id": "mc-example",
+    "type": "tab",
+    "label": "MailChannels dry-run example"
+  },
+  {
+    "id": "mc-inject",
+    "type": "inject",
+    "z": "mc-example",
+    "name": "Validate example email",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "{\"from\": \"sender@example.com\", \"to\": \"recipient@example.com\", \"subject\": \"Node-RED validation\", \"text\": \"A dry-run example.\"}",
+    "payloadType": "json",
+    "x": 180,
+    "y": 100,
+    "wires": [
+      [
+        "mc-send"
+      ]
+    ]
+  },
+  {
+    "id": "mc-send",
+    "type": "mailchannels-send",
+    "z": "mc-example",
+    "name": "Validate only",
+    "account": "mc-account",
+    "from": "",
+    "to": "",
+    "dryRun": true,
+    "x": 420,
+    "y": 100,
+    "wires": [
+      [
+        "mc-debug"
+      ]
+    ]
+  },
+  {
+    "id": "mc-debug",
+    "type": "debug",
+    "z": "mc-example",
+    "name": "Validation result only",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "mailchannels",
+    "targetType": "msg",
+    "x": 670,
+    "y": 100,
+    "wires": []
+  },
+  {
+    "id": "mc-account",
+    "type": "mailchannels-account",
+    "name": "Enter API key in editor"
+  }
+]

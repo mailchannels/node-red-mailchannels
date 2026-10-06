@@ -1,0 +1,39 @@
+<script type="text/javascript">
+RED.nodes.registerType('mailchannels-account', {
+    category: 'config',
+    defaults: { name: { value: '' } },
+    credentials: { apiKey: { type: 'password' } },
+    label: function () { return this.name || 'MailChannels account'; }
+});
+RED.nodes.registerType('mailchannels-send', {
+    category: 'network', color: '#b6d8eb',
+    defaults: {
+        name: { value: '' },
+        account: { value: '', type: 'mailchannels-account', required: true },
+        from: { value: '' }, to: { value: '' }, dryRun: { value: true }
+    },
+    inputs: 1, outputs: 1, icon: 'font-awesome/fa-envelope',
+    label: function () { return this.name || 'MailChannels email'; }
+});
+</script>
+<script type="text/html" data-template-name="mailchannels-account">
+<div class="form-row"><label for="node-config-input-name">Name</label><input type="text" id="node-config-input-name"></div>
+<div class="form-row"><label for="node-config-input-apiKey">API key</label><input type="password" id="node-config-input-apiKey" autocomplete="new-password"></div>
+</script>
+<script type="text/html" data-template-name="mailchannels-send">
+<div class="form-row"><label for="node-input-name">Name</label><input type="text" id="node-input-name"></div>
+<div class="form-row"><label for="node-input-account">Account</label><input type="text" id="node-input-account"></div>
+<div class="form-row"><label for="node-input-from">Default from</label><input type="text" id="node-input-from" placeholder="sender@example.com"></div>
+<div class="form-row"><label for="node-input-to">Default to</label><input type="text" id="node-input-to" placeholder="recipient@example.com"></div>
+<div class="form-row"><label for="node-input-dryRun">Dry run</label><input type="checkbox" id="node-input-dryRun" style="width:auto"> Validate without sending</div>
+</script>
+<script type="text/html" data-help-name="mailchannels-send">
+<p>Sends email using the MailChannels Email API. Dry run is enabled by default and validates without sending.</p>
+<h3>Input</h3>
+<p><code>msg.payload</code> must contain <code>subject</code> and <code>text</code> and/or <code>html</code>. Set <code>from</code> to an email address and <code>to</code> to an address, comma-separated addresses, or an array of addresses. These override the configured defaults.</p>
+<h3>Output</h3>
+<p>The input message is preserved. <code>msg.mailchannels</code> adds <code>status</code> (<code>validated</code> or <code>accepted</code>), <code>statusCode</code>, and <code>dryRun</code>. Accepted does not mean delivered.</p>
+<p>Attach a Catch node to handle errors. Requests time out after 30 seconds and are never automatically retried; a timeout can have an unknown delivery outcome.</p>
+<p>Store the API key only in the account credential field. Email content remains in the input/output message; avoid debugging entire messages containing private content.</p>
+<p><a href="https://docs.mailchannels.com/email-api/overview">MailChannels setup and domain authentication</a></p>
+</script>
