@@ -33,11 +33,11 @@ describe('MailChannels native TLS transport', function () {
     server = https.createServer(valid, async (req, res) => {
       const chunks = [];
       for await (const chunk of req) chunks.push(chunk);
-      requests.push({ path: req.url, headers: req.headers, body: JSON.parse(Buffer.concat(chunks).toString()) });
+      requests.push({ path: req.url, headers: req.headers, body: chunks.length ? JSON.parse(Buffer.concat(chunks).toString()) : undefined });
       if (received) received();
       if (mode === 'disconnect') { req.socket.destroy(); return; }
       if (mode === 'timeout') return; // The client's actual30-second timer aborts this request.
-      res.writeHead(status, { 'Content-Length': '0', ...(status >= 300 && status < 400 ? { Location: 'https://untrusted.example.test/collect' } : {}) });
+      res.writeHead(status, { 'Content-Length': '0', ...(status >= 300 && status < 400 ? { Location: 'https://api.mailchannels.net/collect' } : {}) });
       res.end();
     });
     server.on('tlsClientError', () => {});
