@@ -36,7 +36,7 @@ describe('MailChannels native TLS transport', function () {
       requests.push({ path: req.url, headers: req.headers, body: chunks.length ? JSON.parse(Buffer.concat(chunks).toString()) : undefined });
       if (received) received();
       if (mode === 'disconnect') { req.socket.destroy(); return; }
-      if (mode === 'timeout') return; // The client's actual30-second timer aborts this request.
+      if (mode === 'timeout') return; // The client's actual 30-second timer aborts this request.
       res.writeHead(status, { 'Content-Length': '0', ...(status >= 300 && status < 400 ? { Location: 'https://api.mailchannels.net/collect' } : {}) });
       res.end();
     });
@@ -90,7 +90,7 @@ describe('MailChannels native TLS transport', function () {
     assert.equal(requests[0].headers['x-api-key'], 'synthetic-native-key');
     assert.equal(requests[0].body.personalizations[0].to[0].email, 'team@example.test');
   });
-  it('handles native empty202 as acceptance, not delivery', async function () {
+  it('handles native empty 202 as acceptance, not delivery', async function () {
     status = 202;
     const result = await invoke(await load({ dryRun: false }));
     assert.equal(result.error, undefined);
@@ -128,7 +128,7 @@ describe('MailChannels native TLS transport', function () {
     failed(await invoke(await load()));
     assert.equal(requests.length, 1);
   });
-  it('aborts on the actual30-second deadline without retry', async function () {
+  it('aborts on the actual 30-second deadline without retry', async function () {
     mode = 'timeout';
     const node = await load(); const started = performance.now();
     failed(await invoke(node));
