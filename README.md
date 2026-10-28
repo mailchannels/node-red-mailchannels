@@ -4,7 +4,7 @@ Send transactional email through the [MailChannels Email API](https://docs.mailc
 
 ## Development status
 
-This is an unreleased candidate with [public source and issue tracking](https://github.com/mailchannels/node-red-mailchannels). It is not yet published to npm or listed in the Node-RED Flow Library. Runtime behavior is tested with Node-RED 4.1.8 and 5.0.7 and mocked HTTP responses. The example flow, send configuration dialog, dry-run default, and password credential field were verified in the Node-RED 5.0.7 editor. Live account validation remains outstanding.
+This is an unreleased candidate with [public source and issue tracking](https://github.com/mailchannels/node-red-mailchannels). It is not yet published to npm or listed in the Node-RED Flow Library. Runtime behavior is tested with Node-RED 4.1.8 and 5.0.7 with mocked HTTP responses and real loopback TLS fixtures. The example flow, send configuration dialog, dry-run default, and password credential field were verified in the Node-RED 5.0.7 editor. Live account validation remains outstanding.
 
 Requires Node.js 22 or later and Node-RED 4 or later. For local testing, run `npm install /absolute/path/to/this/package` from your Node-RED user directory, then restart Node-RED. Import the example from the editor's Examples menu.
 
@@ -45,8 +45,8 @@ Attach a Catch node for failures. Requests time out after 30 seconds and are can
 
 ## Development
 
-Run `npm ci` and `npm test`. Tests load the actual Node-RED runtime and cover flow wiring, password credentials, validation, dry-run/send status handling, input errors, cancellation, and sanitized failures. HTTP is mocked; tests do not send email.
+Run `npm ci` and `npm test`. Tests load the actual Node-RED runtime and cover flow wiring, password credentials, validation, dry-run/send status handling, input errors, cancellation, and sanitized failures. Ten tests mock HTTP. Nine additional tests use the real fetch implementation and Node-RED runtime against a loopback TLS server, retaining API-hostname verification. They cover 200/202, untrusted CA/wrong hostname, redirects, API errors, post-receipt disconnect, the actual 30-second timeout, and node-unload cancellation. They use synthetic credentials and no real email. The full 19-test suite takes about 31 seconds and requires OpenSSL for temporary fixture certificates. Test-only routing and CA trust use a development Undici dispatcher; production code is unchanged.
 
 Publication requires a public scoped npm package and a separate [Flow Library submission](https://flows.nodered.org/add/node). A local package or repository does not establish a live listing.
 
-The development dependency audit currently reports 16 advisories in Node-RED tooling. This package ships no runtime dependencies. The suggested automatic fix downgrades Node-RED; no forced downgrade or unverified dependency override has been applied. Keep the development editor local and review upstream dependency updates before operating a shared test environment.
+The development dependency audit currently reports 17 advisories in Node-RED tooling. This package ships no runtime dependencies. The suggested automatic fix downgrades Node-RED; no forced downgrade or unverified dependency override has been applied. Keep the development editor local and review upstream dependency updates before operating a shared test environment.
