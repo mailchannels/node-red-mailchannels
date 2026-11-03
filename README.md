@@ -2,6 +2,12 @@
 
 Send transactional email through the [MailChannels Email API](https://docs.mailchannels.com/email-api/overview). This package provides a `mailchannels-send` node and a reusable `mailchannels-account` credential configuration.
 
+## Support
+
+This project is supported by the MailChannels team on a best-effort basis. The best way to get support is to file an issue on GitHub: https://github.com/mailchannels/node-red-mailchannels/issues
+
+If you are a MailChannels customer and have a problem with the operation of the MailChannels service, you can get support at https://support.mailchannels.com/
+
 ## Development status
 
 This is an unreleased candidate with [public source and issue tracking](https://github.com/mailchannels/node-red-mailchannels). It is not yet published to npm or listed in the Node-RED Flow Library. Runtime behavior is tested with Node-RED 4.1.8 and 5.0.7 with mocked HTTP responses and real loopback TLS fixtures. The example flow, send configuration dialog, dry-run default, and password credential field were verified in the Node-RED 5.0.7 editor. Live account validation remains outstanding.
