@@ -8,11 +8,13 @@ This project is supported by the MailChannels team on a best-effort basis. The b
 
 If you are a MailChannels customer and have a problem with the operation of the MailChannels service, you can get support at https://support.mailchannels.com/
 
-## Development status
+## Install
 
-This is an unreleased candidate with [public source and issue tracking](https://github.com/mailchannels/node-red-mailchannels). It is not yet published to npm or listed in the Node-RED Flow Library. Runtime behavior is tested with Node-RED 4.1.8 and 5.0.7 with mocked HTTP responses and real loopback TLS fixtures. The example flow, send configuration dialog, dry-run default, and password credential field were verified in the Node-RED 5.0.7 editor. Live account validation remains outstanding.
+Requires Node.js 22 or later and Node-RED 4 or later. Install `@mailchannels/node-red-mailchannels` from the editor's Manage palette, or run `npm install @mailchannels/node-red-mailchannels` from your Node-RED user directory and restart Node-RED. Import the example from the editor's Examples menu.
 
-Requires Node.js 22 or later and Node-RED 4 or later. For local testing, run `npm install /absolute/path/to/this/package` from your Node-RED user directory, then restart Node-RED. Import the example from the editor's Examples menu.
+## Status
+
+Version 0.1.0 is the first public release. Runtime behavior is tested with Node-RED 4.1.8 and 5.0.7 with mocked HTTP responses and real loopback TLS fixtures. The example flow, send configuration dialog, dry-run default, and password credential field were verified in the Node-RED 5.0.7 editor. On 2026-10-31 the node passed a live dry-run against the MailChannels Email API in Node-RED 5.0.7 (HTTP 200, nothing sent).
 
 ## Configure
 
