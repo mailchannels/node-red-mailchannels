@@ -1,7 +1,7 @@
 {
   "name": "@mailchannels/node-red-mailchannels",
   "version": "0.1.0",
-  "description": "Send transactional email with the MailChannels Email API from Node-RED.",
+  "description": "Send Node-RED email reliably through MailChannels: delivery tracking, bounce handling and domain authentication built in. Free to start.",
   "license": "MIT",
   "engines": {
     "node": ">=22"

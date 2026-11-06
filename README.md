@@ -1,6 +1,8 @@
 # MailChannels for Node-RED
 
-Send transactional email through the [MailChannels Email API](https://docs.mailchannels.com/email-api/overview). This package provides a `mailchannels-send` node and a reusable `mailchannels-account` credential configuration.
+MailChannels sends your Node-RED flows' email, such as alerts, order confirmations, password resets, form notifications and reports, through the [MailChannels Email API](https://docs.mailchannels.com/email-api/overview) instead of an SMTP server, so it reaches the inbox. Connect with an API key, verify your domain, and every message is tracked: you can see deliveries, bounces and complaints, and bounced addresses are suppressed automatically. MailChannels has delivered email for web hosting providers for twenty years. Start free with 100 emails a day, then pay one simple price per send.
+
+This package provides a `mailchannels-send` node and a reusable `mailchannels-account` credential configuration.
 
 ## Support
 
