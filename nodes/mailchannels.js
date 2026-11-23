@@ -3,6 +3,8 @@
 class PublicError extends Error {}
 
 const ENDPOINT = 'https://api.mailchannels.net/tx/v1/send';
+// Identifies this node's Email API traffic in usage reporting.
+const USER_AGENT = `mailchannels-node-red/${require('../package.json').version}`;
 
 module.exports = function (RED) {
   function MailChannelsAccount(config) {
@@ -61,7 +63,7 @@ module.exports = function (RED) {
         try {
           response = await fetch(ENDPOINT + (dryRun ? '?dry-run=true' : ''), {
             method: 'POST', redirect: 'error', signal: controller.signal,
-            headers: { 'Content-Type': 'application/json', 'X-Api-Key': apiKey }, body
+            headers: { 'Content-Type': 'application/json', 'X-Api-Key': apiKey, 'User-Agent': USER_AGENT }, body
           });
         } catch {
           throw new PublicError('MailChannels request failed or timed out; delivery outcome may be unknown. No automatic retry was attempted.');
