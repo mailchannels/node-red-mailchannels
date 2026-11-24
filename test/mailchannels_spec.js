@@ -42,6 +42,7 @@ describe('MailChannels runtime', function () {
     assert.equal(result.output.correlation, 'keep');
     assert.equal(calls[0].url, 'https://api.mailchannels.net/tx/v1/send?dry-run=true');
     assert.equal(calls[0].options.headers['X-Api-Key'], key);
+    assert.equal(calls[0].options.headers['User-Agent'], 'mailchannels-node-red/0.1.1');
     assert.equal(calls[0].options.redirect, 'error');
     assert.equal(JSON.parse(calls[0].options.body).content.length, 2);
     assert(!JSON.stringify(result.output).includes(key));
